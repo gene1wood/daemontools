@@ -110,7 +110,7 @@ end
 
 action :start do
   unless @svc.running
-    execute "svc -u #{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -u #{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
@@ -120,86 +120,84 @@ action :disable do
     link "#{node['daemontools']['service_dir']}/#{new_resource.service_name}" do
       action :delete
     end
-    execute "svc -dx . log" do
-      cwd new_resource.directory
-    end
+    run_command_with_systems_locale(:command => "svc -dx . log", :cwd => new_resource.directory)
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :stop do
   if @svc.running
-    execute "svc -p #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -p #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :restart do
   if @svc.running
-    execute "svc -t #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -t #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :up do
   if @svc.running
-    execute "svc -u #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -u #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :once do
   if @svc.running
-    execute "svc -o #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -o #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :pause do
   if @svc.running
-    execute "svc -p #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -p #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :cont do
   if @svc.running
-    execute "svc -c #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -c #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :hup do
   if @svc.running
-    execute "svc -h #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -h #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :alrm do
   if @svc.running
-    execute "svc -a #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -a #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :int do
   if @svc.running
-    execute "svc -i #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -i #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :term do
   if @svc.running
-    execute "svc -t #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -t #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
 
 action :kill do
   if @svc.running
-    execute "svc -k #{node['daemontools']['service_dir']}/#{new_resource.service_name}"
+    run_command_with_systems_locale(:command => "svc -k #{node['daemontools']['service_dir']}/#{new_resource.service_name}")
     new_resource.updated_by_last_action(true)
   end
 end
