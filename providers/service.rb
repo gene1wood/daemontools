@@ -44,7 +44,8 @@ def load_current_resource
 end
 
 action :enable do
-  unless @svc.enabled
+  #unless @svc.enabled
+  notifying_action :run do
     directory new_resource.directory do
       owner new_resource.owner
       group new_resource.group
@@ -103,8 +104,6 @@ action :enable do
     link"#{node['daemontools']['service_dir']}/#{new_resource.service_name}" do
       to new_resource.directory
     end
-
-    new_resource.updated_by_last_action(true)
   end
 end
 
